@@ -26,7 +26,6 @@ export class Worker {
     this.failureRate = options.failureRate ?? 0.3;
 
     this.listeners = new Set();
-    console.log("🔥 Worker created", this);
   }
 
   /* =====================
@@ -39,7 +38,6 @@ export class Worker {
   }
 
   _notify() {
-    console.log("🔔 notify listeners", this.listeners.size);
     this.listeners.forEach(fn => fn());
   }
 
@@ -48,9 +46,7 @@ export class Worker {
   ====================== */
 
   addJob(job) {
-    console.log("➕ addJob called", job);
     this.queue.enqueue(job);
-    console.log("📦 queue after enqueue", this.queue.getAllJobs());
     this._notify();
   }
 
@@ -59,7 +55,7 @@ export class Worker {
     if (!job) return;
     if (job.state !== JobState.FAILED) return;
 
-    console.log("🔁 retry job", job.id);
+    
 
     job.state = JobState.PENDING;
     job.attempts = 0;

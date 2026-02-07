@@ -12,18 +12,18 @@ export function Column({ title, jobs }) {
 
       {jobs.map(job => (
         <div key={job.id} className={`job ${job.state.toLowerCase()}`}>
-          <div className="job-title">📧 Email #{job.id}</div>
+          <div className="job-title">Email #{job.id}</div>
 
           <div className="job-meta">
             Failures: {job.attempts}/{job.maxAttempts}
           </div>
 
           {job.lastError && (
-            <div className="job-error">❌ {job.lastError}</div>
+            <div className="job-error">{job.lastError}</div>
           )}
 
           {job.state === JobState.RUNNING && (
-            <div className="spinner">⏳ Sending…</div>
+            <div className="spinner">Sending…</div>
           )}
 
           {job.state === JobState.FAILED && (
